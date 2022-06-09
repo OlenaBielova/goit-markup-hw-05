@@ -578,10 +578,34 @@ cursor: pointer;
     height: 404px;
 }
 
+.portfolio-top-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-top-text {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(33, 150, 243, 0.9);
+    padding: 63px 24px;
+    font-size: 18px;
+    line-height: calc(28/18);
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .portfolio-item:hover, .portfolio-it:empty {
     box-shadow: 1px 4px 6px 0 rgba(0, 0, 0, 0.16), 0 4px 4px 0 rgba(0, 0, 0, 0.06);
 }
 
+.portfolio-item:hover .portfolio-top-text {
+    transform: translateY(0);
+}
 .card-overlay {
     position: absolute;
     z-index: 1;
@@ -619,14 +643,16 @@ cursor: pointer;
     height: 100%;
 }
 
+
 /* -------------------Backdrop------------------- */
 
 .backdrop {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     background: rgba(0, 0, 0, 0.2);
     top: 0;
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .is-hidden {
@@ -634,11 +660,21 @@ cursor: pointer;
     opacity: 0;
     pointer-events: none;
 }
+
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
 .modal {
 position:relative;
 top: 50%;
 left: 50%;
-transform: translateX(-50%) translateY(-50%);
+transform: translate(-50%, -50%) scale(1);
+transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 width: 528px;
 height: 581px;
 background-color: rgba(255, 255, 255, 1);
@@ -651,12 +687,13 @@ border-radius: 4px;
 .modal-close-btn {
 width: 30px;
 height: 30px;
-position: relative;
-top: 0;
-right: 0;
+position: absolute;
+top: 8px;
+right: 8px;
 border-radius: 50%;
 padding: 0;
-display: inline-block;
+background: #FFFFFF;
+border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .modal-close-icon {
